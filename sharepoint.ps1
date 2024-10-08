@@ -1,20 +1,38 @@
 <#
-    Script: Restore Deleted OneDrive and Assign Site Collection Admin
-    Description: 
+.SYNOPSIS
+    Restore a deleted OneDrive site and assign a new Site Collection Admin.
+
+.DESCRIPTION
     This script is designed to restore a deleted OneDrive site for a user and assign a new Site Collection Admin 
     to the restored site. It checks if the OneDrive site exists in the deleted sites, attempts to restore it if found, 
-    and sets the specified user as the Site Collection Admin. 
+    and sets the specified user as the Site Collection Admin.
 
-    Usage:
-    1. The script checks if the required "Microsoft.Online.SharePoint.PowerShell" module is installed, 
-       installs it if necessary, and imports it.
-    2. You will be prompted to enter your tenant admin URL (e.g., https://abc123-admin.sharepoint.com).
-    3. After validating the URL, the script connects to SharePoint Online.
-    4. You will be prompted to enter the username of the deleted OneDrive user.
-    5. The script formulates the OneDrive URL and checks for its existence in deleted sites.
-    6. If the deleted site is found, the script attempts to restore it. 
-    7. You will then be prompted to enter the email address of the new Site Collection Admin.
-    8. Finally, the specified admin will be assigned to the restored OneDrive site.
+.PARAMETER adminURL
+    The URL of your tenant admin, such as https://abc123-admin.sharepoint.com.
+
+.PARAMETER userName
+    The username (UPN) of the user whose OneDrive site you want to restore, in the format first.last@domain.com.
+
+.PARAMETER adminUserEmail
+    The email address of the new Site Collection Admin who will be granted access to the restored OneDrive site.
+
+.EXAMPLE
+    # Run the script to restore a deleted OneDrive site and assign a new Site Collection Admin
+    $adminURL = "https://abc123-admin.sharepoint.com"
+    $userName = "john.doe@company.com"
+    $adminUserEmail = "admin@company.com"
+
+    .\Restore-OneDriveAndAssignAdmin.ps1
+
+.NOTES
+    Author: Don Cook
+    Date: 2024-10-07
+
+    Modules Required:
+      - Microsoft.Online.SharePoint.PowerShell: This module allows managing SharePoint Online, including OneDrive.
+
+    The script will prompt for the admin URL and user information, and it will attempt to restore the deleted OneDrive site.
+    If successful, the script will assign the specified Site Collection Admin to the restored OneDrive site.
 #>
 
 $moduleName = "Microsoft.Online.SharePoint.PowerShell"
