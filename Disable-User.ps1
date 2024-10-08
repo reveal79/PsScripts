@@ -1,26 +1,40 @@
 <#
-    Script: Reset and Disable User in Azure AD and Active Directory
-    Description: This script resets a user's Azure AD password (twice), blocks their sign-in, revokes all sessions, 
-                 and disables their account in on-premises Active Directory across multiple domains.
-                 
+.SYNOPSIS
+    Reset and disable a user in both Azure AD and on-premises Active Directory across multiple domains.
+
+.DESCRIPTION
+    This script resets a user's Azure AD password twice, blocks their sign-in, revokes all sessions, 
+    and disables their account in on-premises Active Directory across multiple domains.
+    
+    It is designed for hybrid environments where both Azure AD and on-prem AD accounts exist.
+
+.PARAMETER UserPrincipalName
+    The UserPrincipalName (UPN) of the user whose Azure AD and AD account you want to reset and disable.
+
+.PARAMETER ADDomains
+    An array of Active Directory domains to check for the user account. 
+
+.PARAMETER adCreds
+    Active Directory credentials to use when performing actions on the AD domains.
+
+.EXAMPLE
+    # Define the AD domains to check and reset the user in Azure AD and AD
+    $ADDomains = @("yourdomain.local", "otherdomain.com")
+    $userPrincipalName = "john.doe@company.com"
+    $adCreds = Get-Credential
+    
+    .\Reset-Disable-User.ps1
+
+    This command resets the user's Azure AD account, blocks their sign-in, revokes all sessions, 
+    and disables their AD account in the specified domains.
+
+.NOTES
     Modules Required:
       - AzureAD: This module allows managing Azure Active Directory users.
       - ActiveDirectory: This module allows managing on-premises Active Directory users.
 
-    Usage:
-    1. Ensure you have the AzureAD and ActiveDirectory PowerShell modules installed.
-    2. Set the $ADDomains variable with your Active Directory domains.
-    3. Run the script, and when prompted, enter your AD credentials and the UPN (email) of the user whose account 
-       you want to reset and disable.
-    4. The script will reset the user's password twice in Azure AD, block their sign-in, revoke all Azure AD sessions, 
-       and disable their account in Active Directory across the specified domains.
-    5. After processing, the script will prompt you if you want to reset another user.
-
-    Example:
-    - Domains: @("yourdomain.local", "otherdomain.com")
-    - User to reset: john.doe@company.com
-    
-    Note: The script is designed for hybrid environments where both Azure AD and on-premises AD accounts exist.
+    Author: Don Cook
+    Date: 2024-10-07
 #>
 
 # Import necessary modules for interacting with Azure AD and Active Directory
