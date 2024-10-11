@@ -1,5 +1,5 @@
 # --------------------------------------------
-# Script Name: Reset-AzureADUser.ps1
+# Script Name: Secure-AzureADUser.ps1
 # Purpose: To reset an Azure AD user account in the event of compromise. This script handles:
 # - Password resets
 # - Blocking sign-ins
