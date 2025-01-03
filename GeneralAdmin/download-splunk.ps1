@@ -1,4 +1,30 @@
-﻿function Download-Splunk {
+# Download-Splunk.ps1
+
+## Overview
+This PowerShell script allows you to download Splunk Enterprise and Universal Forwarder installers directly from the official Splunk website. It fetches available URLs dynamically and supports resuming downloads if interrupted.
+
+## Features
+- Dynamically fetches download URLs for Splunk Enterprise and Universal Forwarder.
+- Prompts the user to select a version to download.
+- Supports resuming downloads for partially downloaded files.
+- Provides user-friendly messages and validation.
+
+## Prerequisites
+- PowerShell 5.1 or later.
+- Internet access.
+
+## Usage
+1. Save the script as `Download-Splunk.ps1`.
+2. Open a PowerShell terminal.
+3. Run the script:
+   ```powershell
+   .\Download-Splunk.ps1
+   ```
+4. Follow the on-screen instructions to select and download the desired Splunk installer.
+
+## Code
+```powershell
+function Download-Splunk {
     function Get-URLsFromPage {
         param (
             [string]$Url,
@@ -11,10 +37,10 @@
     }
 
     Write-Host "⏳ Fetching the list of Splunk Enterprise URLs..."
-    $splunkEnterpriseURLs = Get-URLsFromPage -Url "https://www.splunk.com/en_us/download/splunk-enterprise.html" -Pattern 'data-link=\"([^\"]+)\"'
+    $splunkEnterpriseURLs = Get-URLsFromPage -Url "https://www.splunk.com/en_us/download/splunk-enterprise.html" -Pattern 'data-link="([^"]+)"'
 
     Write-Host "⏳ Fetching the list of Splunk Universal Forwarder URLs..."
-    $splunkUFURLs = Get-URLsFromPage -Url "https://www.splunk.com/en_us/download/universal-forwarder.html" -Pattern 'data-link=\"([^\"]+)\"'
+    $splunkUFURLs = Get-URLsFromPage -Url "https://www.splunk.com/en_us/download/universal-forwarder.html" -Pattern 'data-link="([^"]+)"'
 
     $allURLs = $splunkEnterpriseURLs + $splunkUFURLs
 
@@ -26,7 +52,7 @@
     Write-Host "❓ Please choose a value from the following list:" -ForegroundColor Yellow
     $allURLs | ForEach-Object {
         $index = [array]::IndexOf($allURLs, $_)
-        Write-Host "$(($index + 1)). $_"
+        Write-Host "$($index + 1). $_"
     }
 
     while ($true) {
@@ -36,7 +62,6 @@
             $selectedURL = $allURLs[$choice - 1]
             $filename = [System.IO.Path]::GetFileName($selectedURL)
 
-            # Check for existing file and its size
             if (Test-Path $filename) {
                 $existingSize = (Get-Item $filename).Length
                 Write-Host "⏳ Resuming download. File already exists: $filename ($existingSize bytes)" -ForegroundColor Cyan
@@ -47,7 +72,7 @@
                 Invoke-WebRequest -Uri $selectedURL -OutFile $filename -UseBasicParsing
             }
 
-            Write-Host "Downloaded `\"$filename`\"" -ForegroundColor Green
+            Write-Host "Downloaded `"$filename`"" -ForegroundColor Green
             Write-Host "🎉 Done, have a great day!" -ForegroundColor Green
             break
         } else {
