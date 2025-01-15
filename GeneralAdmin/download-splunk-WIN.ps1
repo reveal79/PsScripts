@@ -1,4 +1,4 @@
-# Download-Splunk.ps1
+# download-splunk-WIN.ps1
 
 ## Overview
 This PowerShell script allows you to download Splunk Enterprise and Universal Forwarder installers directly from the official Splunk website. It fetches available URLs dynamically and supports resuming downloads if interrupted.
@@ -18,7 +18,7 @@ This PowerShell script allows you to download Splunk Enterprise and Universal Fo
 2. Open a PowerShell terminal.
 3. Run the script:
    ```powershell
-   .\Download-Splunk.ps1
+   .\download-splunk-WIN.ps1
    ```
 4. Follow the on-screen instructions to select and download the desired Splunk installer.
 
