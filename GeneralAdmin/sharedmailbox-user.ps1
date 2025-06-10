@@ -18,7 +18,7 @@ Connect-ExchangeOnline
 
 # Prompt the user to enter the username to search for permissions.
 # Example input: John.Smith@domain.com
-$User = Read-Host -Prompt "Enter the username to search (e.g., John.Smith@ecentria.com)"
+$User = Read-Host -Prompt "Enter the username to search (e.g., John.Smith@contoso.com)"
 
 # Retrieve all shared mailboxes in Exchange Online
 # Process each shared mailbox to determine if the specified user has permissions
