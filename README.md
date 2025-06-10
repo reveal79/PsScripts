@@ -1,34 +1,63 @@
-P**sScripts**
+# PsScripts
 
-Welcome to the **PsScripts** repository! This collection is designed to share PowerShell scripts that simplify repetitive administrative tasks.
+![PowerShell](https://img.shields.io/badge/Language-PowerShell-blue.svg)
+![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-**Purpose**
-Many of the scripts here automate tasks that would otherwise take longer to complete manually, such as logging in, navigating through menus, or performing system administration tasks. Instead of repeating these steps, you can simply run a script (./script) and let it handle the job for you.
+A collection of real-world PowerShell scripts created and maintained by **Don Cook**. These tools are used to simplify, automate, and secure IT administration across both on-prem and hybrid Microsoft environments.
 
-**Folder Structure**
-The scripts in this repository are organized into the following folders:
+---
 
-**AzureAD:**
-Scripts related to managing users and groups in Azure Active Directory. These include tasks such as exporting user group memberships or managing user properties.
+## 📁 Repository Structure
 
-**ActiveDirectory:**
-Scripts for managing on-premises Active Directory, including tasks such as comparing group memberships, updating user details, and other AD-related administrative tasks.
+```
+PsScripts/
+├── ActiveDirectory/       # On-prem group/user management and reporting
+├── AzureAD/               # Cloud mailbox/user automation
+├── GeneralAdmin/          # General system and deployment scripts
+├── MFA/                   # MFA and identity security scripts
+```
 
-**MFA:**
-Scripts specifically focused on Multi-Factor Authentication (MFA), auditing user MFA methods and configurations, and ensuring compliance with security policies.
+---
 
-**GeneralAdmin:**
-General scripts that don’t fit into a specific service category. These include administrative tasks such as restoring OneDrive sites or resetting user credentials across hybrid environments.
+## 🚀 Featured Scripts
 
-**Disclaimer**
-I am not a programmer by trade; these scripts are the result of practical needs and experience in IT administration. While they may not follow formal coding practices, they are designed to be functional and efficient for the tasks at hand. I hope you find them useful!
+| Script                          | Description |
+|---------------------------------|-------------|
+| `Audit-AdminAccounts.ps1`       | Reports inactive admin accounts based on naming convention (`a_*`) |
+| `Copy-ADUserWithGUI.ps1`        | Interactive GUI for creating users based on a source template |
+| `Disable-User.ps1`              | Hybrid account reset + disable with AzureAD + AD |
+| `Get-ExpiringADUsers.ps1`       | Identify users with soon-to-expire passwords |
+| `Compare-GroupMembers.ps1`      | Compare membership between two AD groups |
+| `Audit-MissingAuthenticatorMFA.ps1` | Identify users missing MFA authenticators in Entra ID |
 
-**Use Cases**
-These scripts can be especially helpful for:
+---
 
-Automating routine administrative tasks
-Reducing the time spent on repetitive processes
-Enhancing productivity for system administrators and IT professionals
+## 🧰 Prerequisites
 
-**Contribution**
-Feel free to suggest improvements or share feedback. If you find a script helpful or have a way to make it better, contributions are welcome!
+- PowerShell 5.1+ or PowerShell 7+ (where applicable)
+- RSAT: Active Directory PowerShell Module
+- AzureAD module (installable via `Install-Module AzureAD`)
+- Appropriate credentials and administrative rights
+
+---
+
+## 🔒 Usage Considerations
+
+- This repo avoids any real domain references — please **update default domain placeholders** before running.
+- Customize output paths (`C:\Reports`, etc.) or make them script parameters for flexibility.
+
+---
+
+## 📜 License
+
+Licensed under the MIT License – feel free to use and adapt the scripts with credit.
+
+---
+
+## 🙌 Author
+
+Don Cook  
+
+[LinkedIn (optional)](https://www.linkedin.com/in/doncook79)  
+
+GitHub: [@reveal79](https://github.com/reveal79)
